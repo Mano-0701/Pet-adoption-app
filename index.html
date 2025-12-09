@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Adoption Portal</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JS -->
+  <script src="js/main.js" defer></script>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 w-full p-4 bg-transparent z-50">
+    <div class="max-w-7xl mx-auto flex justify-between">
+      <h1 class="text-2xl font-bold text-orange-500">PetAdopt</h1>
+
+      <ul class="hidden md:flex gap-8 text-gray-700 font-medium">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pets.html">Pets</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="adopt.html">Adopt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-4">
+    <h2 class="hero-title text-5xl md:text-6xl font-bold mb-4 text-gray-800">
+      Find Your New <span class="text-orange-500">Best Friend</span>
+    </h2>
+    <p class="text-lg md:text-xl text-gray-600 max-w-2xl">
+      Adopt a loving pet and give them a new home. Your companion is waiting!
+    </p>
+
+    <a href="pets.html" class="mt-6 bg-orange-500 text-white px-8 py-3 rounded-lg shadow-lg btn-hover">
+      Browse Pets
+    </a>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="py-16 bg-white">
+    <h3 class="text-3xl font-bold text-center mb-10">Featured Pets</h3>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
+
+      <div class="bg-gray-50 shadow-md rounded-xl overflow-hidden pet-card">
+        <img src="images/dog1.jpg" class="h-48 w-full object-cover pet-img">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Bella</h4>
+          <p class="text-gray-600">Friendly • 2 Years</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 shadow-md rounded-xl overflow-hidden pet-card">
+        <img src="images/cat1.jpg" class="h-48 w-full object-cover pet-img">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Milo</h4>
+          <p class="text-gray-600">Calm • 1 Year</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="text-center py-16 bg-orange-50">
+    <h3 class="text-3xl font-bold mb-4">Ready to Adopt?</h3>
+
+    <a href="adopt.html" class="mt-6 inline-block bg-orange-500 text-white px-8 py-3 rounded-lg shadow-lg btn-hover">
+      Start Adoption
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-gray-300 py-6 text-center">
+    <p>© 2025 PetAdopt — All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

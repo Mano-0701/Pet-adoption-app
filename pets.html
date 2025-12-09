@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Pets</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- NAV -->
+  <nav class="p-4 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between">
+      <h1 class="text-2xl font-bold text-orange-500">All Pets</h1>
+    </div>
+  </nav>
+
+  <!-- PET GRID -->
+  <section class="py-16 max-w-7xl mx-auto px-4">
+
+    <h2 class="text-3xl font-bold mb-8">Choose Your Companion</h2>
+
+    <!-- Dynamic Grid -->
+    <div id="petGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+      <!-- ⭐ STATIC PET CARD 1 — BELLA -->
+      <a href="pet-details.html" class="bg-gray-50 rounded-xl shadow pet-card overflow-hidden">
+        <img src="images/dog1.jpg" class="h-48 w-full object-cover pet-img">
+        <div class="p-4">
+          <h4 class="text-xl font-bold">Bella</h4>
+          <p class="text-gray-600">Friendly • 2 Years</p>
+        </div>
+      </a>
+
+      <!-- ⭐ STATIC PET CARD 2 — MILO -->
+      <a href="pet2-details.html" class="bg-gray-50 rounded-xl shadow pet-card overflow-hidden">
+        <img src="images/cat1.jpg" class="h-48 w-full object-cover pet-img">
+        <div class="p-4">
+          <h4 class="text-xl font-bold">Milo</h4>
+          <p class="text-gray-600">Calm • 1 Year</p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-10">
+        <button id="loadPets"
+            class="bg-orange-500 text-white px-8 py-3 rounded-lg shadow-lg btn-hover">
+            Load More Pets
+        </button>
+    </div>
+
+  </section>
+
+</body>
+</html>
