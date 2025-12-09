@@ -1,34 +1,28 @@
 
 "use strict";
-// ===================================================================
-// API + DOM MANIPULATION FOR PETS PAGE WITH RANDOM DETAILS (compiled)
-// ===================================================================
+// API + DOM MANIPULATION FOR PETS PAGE — improved error handling
 const petGrid = document.getElementById("petGrid");
-// Random name generator
-const dogNames = [
-	"Bailey", "Rocky", "Charlie", "Luna", "Cooper",
-	"Milo", "Buddy", "Daisy", "Max", "Lucky"
-];
-// Random personalities
+
+const dogNames = ["Bailey", "Rocky", "Charlie", "Luna", "Cooper", "Milo", "Buddy", "Daisy", "Max", "Lucky"];
 const dogTraits = ["Playful", "Calm", "Friendly", "Energetic", "Curious", "Loyal", "Smart"];
-// Random ages
+
 function randomAge() {
-	return Math.floor(Math.random() * 10) + 1; // 1–10 years
+	return Math.floor(Math.random() * 10) + 1;
 }
-// Extract breed name from API image URL (EXAMPLE: "husky", "retriever")
+
 function extractBreed(url) {
-	var _a, _b;
 	const parts = url.split("/");
-	return (_b = (_a = parts[parts.length - 2]) === null || _a === void 0 ? void 0 : _a.replace(/-/g, " ")) !== null && _b !== void 0 ? _b : "Unknown";
+	const maybe = parts[parts.length - 2];
+	return maybe ? maybe.replace(/-/g, " ") : "Unknown";
 }
-// Create API-based pet card
+
 function createPetCard(imageUrl) {
 	const name = dogNames[Math.floor(Math.random() * dogNames.length)];
 	const trait = dogTraits[Math.floor(Math.random() * dogTraits.length)];
 	const age = randomAge();
 	const breed = extractBreed(imageUrl);
 	const card = document.createElement("a");
-	card.href = "adopt.html"; // API pets go to adoption form
+	card.href = "adopt.html";
 	card.className = "bg-gray-50 shadow-md rounded-xl overflow-hidden pet-card";
 	card.innerHTML = `
 		<img src="${imageUrl}" class="h-48 w-full object-cover pet-img" alt="${breed} image">
@@ -40,23 +34,45 @@ function createPetCard(imageUrl) {
 	`;
 	return card;
 }
-// Fetch Random Dog API and generate full pet details
+
+function showError(message) {
+	if (!petGrid)
+		return;
+	// remove existing error if any
+	const existing = document.getElementById("petApiError");
+	if (existing)
+		existing.remove();
+	const el = document.createElement("div");
+	el.id = "petApiError";
+	el.className = "mb-6 p-4 rounded-lg bg-red-100 text-red-800";
+	el.textContent = message;
+	petGrid.parentNode.insertBefore(el, petGrid);
+}
+
 async function loadRandomPets(count = 4) {
 	if (!petGrid)
 		return;
-	for (let i = 0; i < count; i++) {
-		try {
-			const response = await fetch("https://dog.ceo/api/breeds/image/random");
-			const data = await response.json();
-			const petCard = createPetCard(data.message);
+	try {
+		// Use the bulk endpoint to reduce requests and surface errors clearly
+		const url = `https://dog.ceo/api/breeds/image/random/${count}`;
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Network response was not ok (${response.status})`);
+		}
+		const data = await response.json();
+		// dog.ceo returns { message: [..] } when count > 1
+		const images = Array.isArray(data.message) ? data.message : [data.message];
+		images.forEach((img) => {
+			const petCard = createPetCard(img);
 			petGrid.appendChild(petCard);
-		}
-		catch (error) {
-			console.log("API Fetch Error:", error);
-		}
+		});
+	}
+	catch (error) {
+		console.error("API Fetch Error:", error);
+		showError("Unable to load pets right now. Please try again later.");
 	}
 }
-// Only load on pets.html
+
 if (petGrid) {
 	void loadRandomPets();
 	const btn = document.getElementById("loadPets");
